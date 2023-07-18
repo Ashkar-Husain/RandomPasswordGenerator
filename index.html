@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="passwordGenerator">
+        <div class="inputField">
+            <input type="text" id="password">
+            <span onclick="copyPassword()" id="copied">Copy</span>
+        </div>
+        <div class="btn">
+            <button onclick="passwordGenerator()" id="myBtn">GeneratePassword</button>
+        </div>
+    </div> 
+</div> 
+<script>
+    let passwordGen = document.getElementById('password');
+
+    let length = 8;
+    let lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    let uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let specialChars = '$#@';
+    let numbers = '123456789';
+    let mix_chars = lowercase+uppercase+specialChars+numbers;
+    // console.log(mix_chars);
+    passwordGenerator = () =>{
+        let generatedPassword = '';
+        generatedPassword += lowercase[Math.floor(Math.random() * lowercase.length)];
+        generatedPassword += uppercase[Math.floor(Math.random() * uppercase.length)];
+        generatedPassword += specialChars[Math.floor(Math.random() * specialChars.length)];
+        generatedPassword += numbers[Math.floor(Math.random() * numbers.length)];
+        // console.log(generatedPassword);
+        while(length > generatedPassword.length){
+            generatedPassword += generatedPassword += mix_chars[Math.floor(Math.random() * mix_chars.length)];
+            // console.log(generatedPassword);            
+        }    
+        passwordGen.value = generatedPassword;  
+        // console.log(passwordGen.value);        
+    }
+    copyPassword = () =>{
+        let x;
+        passwordGen.select();
+        x = document.execCommand('copy');
+        // console.log(x) 
+        if(passwordGen.value == ''){
+            copied.innerHTML = 'No Text Seclected'; 
+        }else if(copied.innerHTML = "copied"){
+                document.getElementById("myBtn").disabled = true; 
+                // console.log("myBtn")              
+            }else if(x==true){
+            copied.innerHTML = 'copied';
+        }           
+    }
+</script>  
+</body>
+</html>
